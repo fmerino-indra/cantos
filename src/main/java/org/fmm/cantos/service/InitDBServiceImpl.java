@@ -2,15 +2,18 @@ package org.fmm.cantos.service;
 
 import static org.fmm.cantos.dto.FileTypeEnum.MP3;
 import static org.fmm.cantos.dto.FileTypeEnum.PNG;
+
 import static org.fmm.cantos.dto.LabelEnum.ACLAMACION;
 import static org.fmm.cantos.dto.LabelEnum.ADVIENTO;
 import static org.fmm.cantos.dto.LabelEnum.AZUL;
 import static org.fmm.cantos.dto.LabelEnum.BLANCO;
+import static org.fmm.cantos.dto.LabelEnum.CATECUMENADO;
 import static org.fmm.cantos.dto.LabelEnum.COMUNION;
 import static org.fmm.cantos.dto.LabelEnum.ELECCION;
 import static org.fmm.cantos.dto.LabelEnum.ENTRADA;
 import static org.fmm.cantos.dto.LabelEnum.FINAL;
 import static org.fmm.cantos.dto.LabelEnum.FRACCIONDELPAN;
+import static org.fmm.cantos.dto.LabelEnum.INDICE;
 import static org.fmm.cantos.dto.LabelEnum.LAUDES;
 import static org.fmm.cantos.dto.LabelEnum.LITURGIA;
 import static org.fmm.cantos.dto.LabelEnum.NAVIDAD;
@@ -65,6 +68,8 @@ public class InitDBServiceImpl implements InitDBService {
 		initLabel(PRECATECUMENADO);
 		initLabel(SALMODIA);
 		initLabel(VIRGEN);
+		initLabel(CATECUMENADO);
+		initLabel(INDICE);
 	}
 
 	private void initLabel(LabelEnum labelEnum) {

@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.util.Assert;
 
 @SpringBootTest(classes = {DownloadApplication.class})
 @AutoConfigureMockMvc
@@ -36,6 +37,13 @@ class ControllerApplicationTests {
 		.andExpect(status().isOk());
 	}
 
+	/**
+	 * Realiza todo el proceso: DownloadController.create
+	 * - requestDataService.downloadProcess();
+	 * - DataService.processData(cantos);
+	 * 
+	 * @throws Exception
+	 */
 //	@Test
 	void test2() throws Exception {
 		mvc.perform(post("/download").contentType(MediaType.APPLICATION_JSON))
@@ -59,8 +67,11 @@ class ControllerApplicationTests {
 		Map<String, CantoDTO> cantos = null;
 		String json = null;
 		json = JsonUtils.readJson("cantos.json");
-//		cantos = ObjectUtils.readObjects("cantos.dat");
+		cantos = ObjectUtils.readObjects("cantos.dat");
+//		Assert.notNull(cantos, "Algo fue mal");
 		cantos = JsonUtils.toObject(json);
+		Assert.notNull(cantos, "Algo fue mal");
+		
 		mvc.perform(post("/download/process").contentType(MediaType.APPLICATION_JSON).content(json))
 		.andExpect(status().isOk());
 	}

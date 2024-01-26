@@ -10,11 +10,14 @@
 #      dialect: org.hibernate.dialect.PostgreSQLDialect
 #      current_session_context_class: jta
   
-
+server:
+  port: 8080
+debug: false
 spring:
   jpa:
     open-in-view: false
 #    database: POSTGRESQL
+
     hibernate:
       ddl-auto: none
     show-sql: false
@@ -59,9 +62,11 @@ logging:
 
 #    org.hibernate.type.descriptor.sql: INFO
 #    org.hibernate.orm.jdbc.bind: INFO
-    org.springframework.transaction: TRACE
-    org.fmm: INFO
-    com.zaxxer.hikari: TRACE
+    org.springframework.transaction: INFO
+    org.fmm: DEBUG
+    com.zaxxer.hikari: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.springframework.web: DEBUG
 application:
   title: Download Cantos
   url-base: https://cantos.cnc.madrid/

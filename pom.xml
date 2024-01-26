@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.4</version>
+		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.fmm.neo</groupId>
@@ -47,7 +47,19 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.fmm.neo</groupId>
+			<artifactId>cantos-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.fmm.neo</groupId>
+			<artifactId>cantos-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	
 	</dependencies>
 
 	<build>

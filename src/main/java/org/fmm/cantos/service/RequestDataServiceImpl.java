@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.fmm.cantos.controller.LabelController;
 import org.fmm.cantos.dto.CantoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -194,6 +193,9 @@ public class RequestDataServiceImpl implements RequestDataService {
 		
 		String aux = null;
 		byte[] auxBytes = null;
+		
+		Path newBinary = null;
+		
 		auxBytes = page.getBytes();
 		
 		saveToFile(auxBytes, canto.getNameShort(), canto.getNameShort(), "txt");
@@ -238,22 +240,25 @@ public class RequestDataServiceImpl implements RequestDataService {
 			canto.setImgUrl(m.group("imgUrl"));
 		}
 		
-		downloadBinary(canto.getImgUrl(), canto.getNameShort(), canto.getNameShort(), "png");
-		
+		newBinary = downloadAndSaveBinary(canto.getImgUrl(), canto.getNameShort(), canto.getNameShort(), "png");
+		canto.setImgFile(newBinary);
 		// URL - termina en .mp3
 		detailPattern  = Pattern.compile("(.*/)*(?<texto>.*)\\.mp3$");
 		
 		for (String mp3: canto.getMp3Url()) {
 			m = detailPattern.matcher(mp3);
-			if (m.find())
-				downloadBinary(mp3, canto.getNameShort(), m.group("texto"), "mp3");
+			if (m.find()) {
+				newBinary = downloadAndSaveBinary(mp3, canto.getNameShort(), m.group("texto"), "mp3");
+				canto.addMp3File(newBinary);
+				
+			}
 		}
 		logger.info("Processed detail: {}", canto.getName());
 		
 		return canto;
 	}
 	
-	private byte[] downloadBinary(String url, String dir, String name, String ext) {
+	private Path downloadAndSaveBinary(String url, String dir, String name, String ext) {
 		byte[] fichero = null;
 		
 		Path newFile = null;
@@ -278,7 +283,7 @@ public class RequestDataServiceImpl implements RequestDataService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return fichero;
+		return newFile;
 	}
 
 	private void saveToFile(byte[] bytes, String dir, String name, String ext) {
