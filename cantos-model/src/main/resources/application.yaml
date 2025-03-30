@@ -1,0 +1,77 @@
+#spring.jpa:
+#  show-sql: false
+#  database: POSTGRESQL
+#  generate-ddl: false
+#  hibernate:
+#    ddl-auto: none
+#  properties:
+#    hibernate:
+#      format_sql: false
+#      dialect: org.hibernate.dialect.PostgreSQLDialect
+#      current_session_context_class: jta
+  
+server:
+  port: 8080
+debug: false
+spring:
+  jpa:
+    open-in-view: false
+#    database: POSTGRESQL
+
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        current_session_context_class: managed
+#    database-platform: org.hibernate.dialect.PostgreSQL9Dialect    
+
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/?currentSchema=cantos
+    username: cantos
+    password: femema
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: CantosHikariPool
+      maximum-pool-size: 5
+      minimum-idle: 5
+      idle-timeout: 10000
+      max-lifetime: 30000
+#      min-pool-size: 10
+#      min-idle: 50
+#      leak-detection-threshold: 5000
+      hikari-auto-commit: true
+
+#spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+#spring.datasource.hikari.minimum-idle=10
+#spring.datasource.hikari.maximum-pool-size=20
+#spring.datasource.hikari.idle-timeout=600000
+#spring.datasource.hikari.max-lifetime=1800000
+#spring.datasource.hikari.validation-timeout=300000
+#spring.datasource.hikari.connection-timeout=30000
+#spring.datasource.hikari.pool-name= hikari-pool
+#spring.datasource.hikari.connection-test-query=SELECT 1
+
+
+logging:
+  level:
+    root: INFO
+#    org.hibernate.SQL: DEBUG
+
+#    org.hibernate.type.descriptor.sql: INFO
+#    org.hibernate.orm.jdbc.bind: INFO
+    org.springframework.transaction: INFO
+    org.fmm: DEBUG
+    com.zaxxer.hikari: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.springframework.web: DEBUG
+application:
+  title: Download Cantos
+  url-base: https://cantos.cnc.madrid/
+  href: post/
+  local-base-dir: .
+  local-download-dir: download
+  
